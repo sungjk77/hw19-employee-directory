@@ -123,8 +123,8 @@ class EmployeeContainer extends Component {
     console.log(value)
       this.setState({
       employeeFilter: this.state.employee.filter(function (person) {
-        if (person.name.first.toLowerCase().includes(value, 0)) return person.name.first.includes(value, 0);
-        if (person.name.last.toLowerCase().includes(value, 0)) return person.name.last.includes(value, 0);
+        if (person.name.first.toLowerCase().includes(value)) return person;
+        if (person.name.last.toLowerCase().includes(value)) return person;
       }),
     });
   };
