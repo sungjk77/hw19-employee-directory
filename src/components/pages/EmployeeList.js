@@ -1,16 +1,10 @@
 import React from 'react'
-<<<<<<< HEAD
-=======
 import ErrorMessage from "./ErrorMessage"
->>>>>>> parent of 0149c25 (Updates)
 
 export default function EmployeeList(props) {
   // const filtered = props.groceries.filter(grocery => !grocery.purchased);
   const filtered = props;
-<<<<<<< HEAD
-=======
   if (filtered.employee.length === 0) return (<ErrorMessage />)
->>>>>>> parent of 0149c25 (Updates)
   return (
     <div>
     <table className="table table-striped table-hover align-middle table-bordered sortable my-3">
@@ -36,11 +30,7 @@ export default function EmployeeList(props) {
           <td>{employee.email}</td>
           <td>{employee.location.city}, {employee.location.state}</td>
         </tr>
-<<<<<<< HEAD
-        ))}
-=======
       ))}
->>>>>>> parent of 0149c25 (Updates)
       </tbody>
     </table>
 </div>
