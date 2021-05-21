@@ -11,15 +11,19 @@ class EmployeeContainer extends Component {
     employee: [],
     employeeFilter: [],
     filter: {
-      quantity: 20
+      quantity: 5,
+      male: true,
+      female: true,
+      us: true,
+      gb: false,
+      au: false
     },
     sortby: "First Name+"
   };
 
   componentDidMount() {
-    API.search("?format=pretty&results=20&nat=us&exc=login,registered,nat")
+    API.search("?format=pretty&results=100&nat=us&exc=login,registered,nat")
     .then((res) => {
-      // console.log(res.data.results);
       this.setState({
         employee: res.data.results,
         employeeFilter: res.data.results
@@ -28,25 +32,20 @@ class EmployeeContainer extends Component {
     .catch((err) => console.log(err));
   }
 
-  searchEmployee() {
-    var query = "?format=pretty";
+  searchEmployee = event => {
+    var query = "?format=pretty&results="+event.target.quantity.value+"&nat=us&exc=login,registered,nat";
+    this.setState.filter({
+      quantity: event.target.quantity.value
+    });
+    console.log(query)
     API.search(query)
     .then((res) => {
-      // console.log(res.data.results);
       this.setState({
         employee: res.data.results,
         employeeFilter: res.data.results
       });
     })
     .catch((err) => console.log(err));
-  };
-
-  handleFilterChange = event => {
-    const value = event.target.value;
-    const name = event.target.name;
-    this.setState.filter({
-      [name]: value
-    });
   };
 
   handleSortClick = event => {
@@ -117,10 +116,9 @@ class EmployeeContainer extends Component {
     }
     return this.state.employeeFilter;
   }
-
+ 
   handleInputChange = event => {
     const value = event.target.value.toLowerCase();
-    console.log(value)
       this.setState({
       employeeFilter: this.state.employee.filter(function (person) {
         if (person.name.first.toLowerCase().includes(value)) return person;
@@ -128,7 +126,7 @@ class EmployeeContainer extends Component {
       }),
     });
   };
-  
+  // todo: prepopulate search bar with datalist
   render() {
     return (
       <>
@@ -143,7 +141,10 @@ class EmployeeContainer extends Component {
           employee={this.handleSort()}
           handleFormSubmit={this.handleSortClick}
         />
-        <ModalForm />
+        <ModalForm 
+          searchEmployee={this.searchEmployee}
+          filter={this.state.filter}
+        />
       </Container>
       </>
     );

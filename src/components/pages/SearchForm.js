@@ -1,8 +1,6 @@
 import React from 'react'
 
 export default function SearchForm(props) {
-  const filtered = props;
-  console.log(filtered)
   return (
     <form className="d-flex px-3 my-3">
       <input
