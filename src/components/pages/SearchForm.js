@@ -1,8 +1,11 @@
 import React from 'react'
 
 export default function SearchForm(props) {
+<<<<<<< HEAD
   const filtered = props;
   console.log(filtered)
+=======
+>>>>>>> parent of 0149c25 (Updates)
   return (
     <form className="d-flex px-3 my-3">
       <input
