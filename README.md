@@ -4,6 +4,8 @@
 ## Description:
 An employee or manager would benefit greatly from being able to view non-sensitive data about other employees. It would be particularly helpful to be able to filter employees by name.
 
+Found Live: https://infinite-cove-41579.herokuapp.com/
+
 Table of Contents
 
 - [Installation](##🛠️Installation)
@@ -11,7 +13,7 @@ Table of Contents
 - [License](##📋License)
 - [Contributing](##📝Contributing)
 - [Tests](##✔️Tests)
-
+- [Screenshot](##📸Screenshot)
 
 ------------
 ## 🛠️Installation
@@ -45,5 +47,5 @@ To test the program, please run the following:
 
 npm run test
 
-
-https://raw.githubusercontent.com/sungjk77/hw19-employee-directory/master/screenshot.JPG
+## 📸Screenshot
+![alt text](https://raw.githubusercontent.com/sungjk77/hw19-employee-directory/master/screenshot.JPG)
