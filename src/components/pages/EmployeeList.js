@@ -2,7 +2,6 @@ import React from 'react'
 import ErrorMessage from "./ErrorMessage"
 
 export default function EmployeeList(props) {
-  // const filtered = props.groceries.filter(grocery => !grocery.purchased);
   const filtered = props;
   if (filtered.employee.length === 0) return (<ErrorMessage />)
   return (

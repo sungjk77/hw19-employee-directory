@@ -14,7 +14,12 @@ function ModalForm(props) {
           <div className="modal-body">
               <div className="mb-3">
                 <label htmlFor="filter-results" className="col-form-label">Quantity to Request:</label>
-                <input type="number" className="form-control" id="filter-results" defaultValue={props.filter.quantity} name="quantity"/>
+                <input 
+                  defaultValue={props.filter.quantity}
+                  name="quantity" 
+                  type="number" 
+                  className="form-control" 
+                />
               </div>
           </div>
           <div className="modal-footer">

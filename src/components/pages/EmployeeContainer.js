@@ -11,7 +11,7 @@ class EmployeeContainer extends Component {
     employee: [],
     employeeFilter: [],
     filter: {
-      quantity: 5,
+      quantity: 100,
       male: true,
       female: true,
       us: true,
@@ -22,7 +22,8 @@ class EmployeeContainer extends Component {
   };
 
   componentDidMount() {
-    API.search("?format=pretty&results=100&nat=us&exc=login,registered,nat")
+    var query = "?format=pretty&results="+this.state.filter.quantity+"&nat=us&exc=login,registered,nat";
+    API.search(query)
     .then((res) => {
       this.setState({
         employee: res.data.results,
@@ -33,59 +34,35 @@ class EmployeeContainer extends Component {
   }
 
   searchEmployee = event => {
-    var query = "?format=pretty&results="+event.target.quantity.value+"&nat=us&exc=login,registered,nat";
-    this.setState.filter({
-      quantity: event.target.quantity.value
-    });
-    console.log(query)
-    API.search(query)
-    .then((res) => {
-      this.setState({
-        employee: res.data.results,
-        employeeFilter: res.data.results
-      });
-    })
-    .catch((err) => console.log(err));
+    // const { name, value } = event.target.quantity;
+    var value = event.target.quantity.value;
+    // event.preventDefault();
+
+    // Object.assign({}, this.state.filter, {quantity:value})
+     this.setState(Object.assign(this.state.filter,{quantity:value}));
+    // const filter = { ...this.state.filter, quantity: value }
+    // this.setState(() => ({ filter }))
+    // this.setState({...this.state.filter, quantity: value});
+    //  alert(event.target.quantity.value)
+    // alert(this.state.filter.quantity)
+    this.componentDidMount();
   };
 
   handleSortClick = event => {
     switch (event.target.id) {
-      case "First Name":
-        if (this.state.sortby === "First Name+") {
-          this.setState({sortby:"First Name-"})
-        } else {
-          this.setState({sortby:"First Name+"})
-        }
+      case "First Name": (this.state.sortby === "First Name+")? this.setState({sortby:"First Name-"}):this.setState({sortby:"First Name+"})
         break;
-      case "Last Name":
-        if (this.state.sortby === "Last Name+") {
-          this.setState({sortby:"Last Name-"})
-        } else {
-          this.setState({sortby:"Last Name+"})
-        }
+      case "Last Name": (this.state.sortby === "Last Name+")? this.setState({sortby:"Last Name-"}):this.setState({sortby:"Last Name+"})
         break;
-      case "Age":
-        if (this.state.sortby === "Age+") {
-          this.setState({sortby:"Age-"})
-        } else {
-          this.setState({sortby:"Age+"})
-        }
+      case "Age": (this.state.sortby === "Age+")?this.setState({sortby:"Age-"}):this.setState({sortby:"Age+"})
         break;
-      case "Gender":
-        if (this.state.sortby === "Gender+") {
-          this.setState({sortby:"Gender-"})
-        } else {
-          this.setState({sortby:"Gender+"})
-        }
+      case "Gender": (this.state.sortby === "Gender+") ? (this.setState({sortby:"Gender-"})) : (this.setState({sortby:"Gender+"}))
         break;
-      default:
-        break;
+      default: break;
     }
-    this.handleSort();
   }
 
   handleSort = () => {
-    // const employeeList = this.state.employeeFilter;
     switch (this.state.sortby) {
       case "First Name+":
         this.state.employeeFilter.sort((a, b) => a.name.first > b.name.first ? 1:-1)
@@ -118,15 +95,14 @@ class EmployeeContainer extends Component {
   }
  
   handleInputChange = event => {
-    const value = event.target.value.toLowerCase();
-      this.setState({
-      employeeFilter: this.state.employee.filter(function (person) {
-        if (person.name.first.toLowerCase().includes(value)) return person;
-        if (person.name.last.toLowerCase().includes(value)) return person;
+    const value = event.target.value.toLowerCase().replace(/\s/g, '');;
+    this.setState({
+      employeeFilter: this.state.employee.filter(function (filtered) {
+        if ((filtered.name.first.toLowerCase()+filtered.name.last.toLowerCase()).includes(value)) return filtered;
       }),
     });
   };
-  // todo: prepopulate search bar with datalist
+
   render() {
     return (
       <>
